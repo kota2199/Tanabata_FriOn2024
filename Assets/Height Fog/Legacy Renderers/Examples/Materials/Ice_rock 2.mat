@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Ice_rock 2
+  m_Shader: {fileID: 4800000, guid: 5a1405ce32c0b534ebf969b4706c9285, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _EMISSION
+  - _NORMALMAP
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AOMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: a4e030e2a713e86439b9c1eb3411272b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicTex:
+        m_Texture: {fileID: 2800000, guid: 0575445ab19abba4fb39c454a5247e8f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 16f5e947fa6230b47897f257806a4808, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecularTex:
+        m_Texture: {fileID: 2800000, guid: 95e9f20a56b028d4db9d334830d6d557, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ANIMATION: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EmissionPower: 0.4
+    - _FogEmissionFalloff: 5
+    - _FogEmissionPower: 0.5
+    - _FogFalloff: 1.4
+    - _FogMax: -0.05
+    - _FogMin: 0.08
+    - _FogRelativeWorldOrLocal: 0
+    - _FogWaveAmplitudeX: 0.015
+    - _FogWaveAmplitudeZ: 0.015
+    - _FogWaveFreqX: 8
+    - _FogWaveFreqZ: 8
+    - _FogWaveSpeedX: 4
+    - _FogWaveSpeedZ: 4
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _MetChannel: 3
+    - _Metallic: 0.3
+    - _Mode: 0
+    - _NormalAmount: 2
+    - _OVERRIDE_FOG_COLOR: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _STANDARD_FOG: 0
+    - _STANDART_FOG: 0
+    - _SmoothnessTextureChannel: 0
+    - _SpecChannel: 3
+    - _SpecularHighlights: 1
+    - _SpecularPower: 0.8
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.6650944, g: 0.92764384, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0.879385, b: 1, a: 1}
+    - _FogColor: {r: 0.60784316, g: 0.92792726, b: 1, a: 1}
+    - _FogEmissionColor: {r: 0, g: 0.37195015, b: 1, a: 1}
+  m_BuildTextureStacks: []
