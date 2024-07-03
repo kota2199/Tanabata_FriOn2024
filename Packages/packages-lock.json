@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.occasoftware.fireworks": {
+      "version": "file:com.occasoftware.fireworks",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.visualeffectgraph": "14.0.7"
+      }
+    },
     "com.unity.burst": {
       "version": "1.8.13",
       "depth": 1,
@@ -196,6 +204,15 @@
       "dependencies": {
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
+      }
+    },
+    "com.unity.visualeffectgraph": {
+      "version": "14.0.10",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.shadergraph": "14.0.10",
+        "com.unity.render-pipelines.core": "14.0.10"
       }
     },
     "com.unity.visualscripting": {
