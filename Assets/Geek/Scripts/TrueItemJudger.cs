@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TrueItemJudger : MonoBehaviour
 {
@@ -16,22 +17,26 @@ public class TrueItemJudger : MonoBehaviour
 
     private int currentStageNumber = 1;
 
+    [SerializeField]
+    private Text currentStageText;
+
     // Start is called before the first frame update
     void Awake()
     {
         isTrue = false;
         currentStageNumber = 1;
+        currentStageText.text = currentStageNumber.ToString();
     }
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        player = this.gameObject;
         playerDefaultPosition = player.transform.position;
     }
 
     private void Update()
     {
-        Debug.Log("CurrentStage : " + currentStageNumber);
+        currentStageText.text = currentStageNumber.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
