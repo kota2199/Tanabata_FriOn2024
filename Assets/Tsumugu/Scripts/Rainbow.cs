@@ -5,7 +5,7 @@ using UnityEngine;
 // https://qiita.com/ga-mi-_qiita/items/ecba3343a14887bcb314
 public class Rainbow : MonoBehaviour
 {
-Material material = null;
+    Material material = null;
 
     [Header("色変更スパン")]
     public float Chnge_Color_Time = 0.1f;
