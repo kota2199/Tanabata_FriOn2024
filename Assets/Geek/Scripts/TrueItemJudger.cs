@@ -18,6 +18,7 @@ public class TrueItemJudger : MonoBehaviour
 
     private Vector3 playerDefaultPosition;
 
+    [SerializeField]
     private int currentStageNumber = 1;
 
     [SerializeField]
@@ -44,6 +45,7 @@ public class TrueItemJudger : MonoBehaviour
     {
         player = this.gameObject;
         playerDefaultPosition = player.transform.position;
+        AudioController.instance.PlaySE(2);
     }
 
     private void Update()
@@ -55,16 +57,19 @@ public class TrueItemJudger : MonoBehaviour
     {
         if(other.gameObject.tag == "TrueItem")
         {
+            AudioController.instance.PlaySE(1);
             withItem = true;
             Destroy(other.gameObject);
         }
 
         if(other.gameObject.tag == "Goal")
         {
+
+            AudioController.instance.PlaySE(2);
+
             if (withItem == withOrWithout[currentStageNumber - 1])
             {
                 StartCoroutine(ToNextStage(currentStageNumber));
-                currentStageNumber++;
             }
             else
             {
@@ -76,14 +81,22 @@ public class TrueItemJudger : MonoBehaviour
     private IEnumerator ToNextStage(int stageNumber)
     {
         Debug.Log("success");
+        if(stageNumber == 7)
+        {
+            StartCoroutine(ToClear());
+        }
+        else
+        {
+            IEnumerator enumerator = fadeController.FadeInandOut();
+            yield return enumerator;
 
-        IEnumerator enumerator = fadeController.FadeInandOut();
-        yield return enumerator;
+            stagePrefabs[stageNumber - 1].gameObject.SetActive(false);
+            stagePrefabs[stageNumber].gameObject.SetActive(true);
 
-        stagePrefabs[stageNumber - 1].gameObject.SetActive(false);
-        stagePrefabs[stageNumber].gameObject.SetActive(true);
+            currentStageNumber++;
 
-        Initialize();
+            Initialize();
+        }
     }
 
     private IEnumerator ReturnStage(int stageNumber)
@@ -108,14 +121,10 @@ public class TrueItemJudger : MonoBehaviour
 
             case 5:
             case 6:
+            case 7:
                 stagePrefabs[4].gameObject.SetActive(true);
                 currentStageNumber = 5;
                 Initialize();
-                break;
-
-            case 7:
-                //end
-                clearUis.SetActive(true);
                 break;
         }
     }
@@ -124,5 +133,14 @@ public class TrueItemJudger : MonoBehaviour
     {
         player.transform.position = playerDefaultPosition;
         withItem = false;
+    }
+
+    private IEnumerator ToClear()
+    {
+        IEnumerator enumerator = fadeController.FadeOut();
+        yield return enumerator;
+        clearUis.SetActive(true);
+        enumerator = fadeController.FadeIn();
+        yield return enumerator;
     }
 }

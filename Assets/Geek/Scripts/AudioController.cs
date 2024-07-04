@@ -7,8 +7,7 @@ public class AudioController : MonoBehaviour
 
     public static AudioController instance;
 
-    [SerializeField]
-    private AudioData audioData;
+    public AudioData audioData;
 
     [SerializeField]
     private AudioSource audioSourceForSe;

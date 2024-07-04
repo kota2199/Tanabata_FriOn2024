@@ -22,6 +22,7 @@ public class AdditionalItem : MonoBehaviour
     {
         if(other.gameObject.tag == "AdditionalItem")
         {
+            AudioController.instance.PlaySE(1);
             additionalItemCounter++;
             itemImages[additionalItemCounter - 1].sprite = activeStar;
             Destroy(other.gameObject);

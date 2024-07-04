@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd529f2d4f1f94d459dc11455e25fd00, type: 3}
   m_Name: AudioData
   m_EditorClassIdentifier: 
-  ses: []
-  bgms: []
+  ses:
+  - seClip: {fileID: 8300000, guid: 80f5bbc17d691440490d37777b5c0bbc, type: 3}
+  - seClip: {fileID: 8300000, guid: 19310e97ff78d4084a3da36ab1eb5832, type: 3}
+  - seClip: {fileID: 8300000, guid: 8016944bac2ad43ba98d9628095128a1, type: 3}
+  bgms:
+  - bgmClip: {fileID: 8300000, guid: b1d301e7c3e854dcbbae1a2971017ddd, type: 3}
