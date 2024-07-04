@@ -22,8 +22,8 @@ public class TitleController : MonoBehaviour
 
     private IEnumerator ToGame(string sceneName)
     {
-        fadeController.FadeOut();
-        yield return new WaitForSeconds(1.0f);
+        IEnumerator enumerator = fadeController.FadeOut();
+        yield return enumerator;
         SceneController.instance.ToGame();
     }
 }

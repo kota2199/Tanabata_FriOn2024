@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class TrueItemJudger : MonoBehaviour
 {
-    private bool isTrue = false;
+    private bool withItem = false;
 
     [SerializeField]
     private GameObject[] stagePrefabs;
+
+    [SerializeField]
+    private bool[] withOrWithout;
 
     [SerializeField]
     private GameObject player;
@@ -18,14 +21,23 @@ public class TrueItemJudger : MonoBehaviour
     private int currentStageNumber = 1;
 
     [SerializeField]
-    private Text currentStageText;
+    private Image gauge;
+
+    [SerializeField]
+    private float gaugeValue, maxGaugeValue;
+
+    [SerializeField]
+    private FadeInOut fadeController;
+
+    [SerializeField]
+    private GameObject clearUis;
 
     // Start is called before the first frame update
     void Awake()
     {
-        isTrue = false;
+        withItem = false;
         currentStageNumber = 1;
-        currentStageText.text = currentStageNumber.ToString();
+        maxGaugeValue = gauge.rectTransform.sizeDelta.x;
     }
 
     private void Start()
@@ -36,50 +48,81 @@ public class TrueItemJudger : MonoBehaviour
 
     private void Update()
     {
-        currentStageText.text = currentStageNumber.ToString();
+        gauge.rectTransform.sizeDelta = new Vector2(maxGaugeValue * currentStageNumber / 7, 49f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "TrueItem")
         {
-            isTrue = true;
-        }
-        else if(other.gameObject.tag == "FalseItem")
-        {
-            isTrue = false;
+            withItem = true;
+            Destroy(other.gameObject);
         }
 
         if(other.gameObject.tag == "Goal")
         {
-            if (isTrue)
+            if (withItem == withOrWithout[currentStageNumber - 1])
             {
-                ToNextStage(currentStageNumber);
+                StartCoroutine(ToNextStage(currentStageNumber));
                 currentStageNumber++;
             }
             else
             {
-                ToFirstStage(currentStageNumber);
-                currentStageNumber = 1;
+                StartCoroutine(ReturnStage(currentStageNumber));
             }
         }
     }
 
-    private void ToNextStage(int stageNumber)
+    private IEnumerator ToNextStage(int stageNumber)
     {
-        Debug.Log("StageNumber" + stageNumber);
+        Debug.Log("success");
+
+        IEnumerator enumerator = fadeController.FadeInandOut();
+        yield return enumerator;
+
         stagePrefabs[stageNumber - 1].gameObject.SetActive(false);
         stagePrefabs[stageNumber].gameObject.SetActive(true);
 
-        player.transform.position = playerDefaultPosition;
-        isTrue = false;
+        Initialize();
     }
 
-    private void ToFirstStage(int stageNumber)
+    private IEnumerator ReturnStage(int stageNumber)
     {
+        Debug.Log("fault");
+
+        IEnumerator enumerator = fadeController.FadeInandOut();
+        yield return enumerator;
+
         stagePrefabs[stageNumber - 1].gameObject.SetActive(false);
-        stagePrefabs[0].gameObject.SetActive(true);
+
+        switch (stageNumber)
+        {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                stagePrefabs[0].gameObject.SetActive(true);
+                currentStageNumber = 1;
+                Initialize();
+                break;
+
+            case 5:
+            case 6:
+                stagePrefabs[4].gameObject.SetActive(true);
+                currentStageNumber = 5;
+                Initialize();
+                break;
+
+            case 7:
+                //end
+                clearUis.SetActive(true);
+                break;
+        }
+    }
+
+    private void Initialize()
+    {
         player.transform.position = playerDefaultPosition;
-        isTrue = false;
+        withItem = false;
     }
 }
