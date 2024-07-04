@@ -20,12 +20,19 @@ public class TrueItemJudger : MonoBehaviour
     [SerializeField]
     private Text currentStageText;
 
+    [SerializeField]
+    private Image gauge;
+
+    [SerializeField]
+    private float gaugeValue, maxGaugeValue;
+
     // Start is called before the first frame update
     void Awake()
     {
         isTrue = false;
         currentStageNumber = 1;
         currentStageText.text = currentStageNumber.ToString();
+        maxGaugeValue = gauge.rectTransform.sizeDelta.x;
     }
 
     private void Start()
@@ -37,6 +44,7 @@ public class TrueItemJudger : MonoBehaviour
     private void Update()
     {
         currentStageText.text = currentStageNumber.ToString();
+        gauge.rectTransform.sizeDelta = new Vector2(maxGaugeValue * currentStageNumber / 7, 49f);
     }
 
     private void OnTriggerEnter(Collider other)

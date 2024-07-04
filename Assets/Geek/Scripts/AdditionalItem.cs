@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class AdditionalItem : MonoBehaviour
+{
+    [SerializeField]
+    private Image[] itemImages;
+
+    [SerializeField]
+    private Sprite activeStar, negativeStar;
+
+    public int additionalItemCounter;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        additionalItemCounter = 0;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "AdditionalItem")
+        {
+            additionalItemCounter++;
+            itemImages[additionalItemCounter - 1].sprite = activeStar;
+            Destroy(other.gameObject);
+        }
+    }
+}
