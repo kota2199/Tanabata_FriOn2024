@@ -1,0 +1,16 @@
+{
+  "displayName": "Fireworks",
+  "name": "com.occasoftware.fireworks",
+  "version": "2.0.0",
+  "unity": "2022.3",
+  "description": "Fireworks visual effects using VFX Graph.",
+  "author": {
+    "name": "OccaSoftware",
+    "email": "hello@occasoftware.com",
+    "url": "https://www.occasoftware.com/"
+  },
+  "unityRelease": "0f1",
+  "dependencies": {
+    "com.unity.visualeffectgraph": "14.0.7"
+  }
+}

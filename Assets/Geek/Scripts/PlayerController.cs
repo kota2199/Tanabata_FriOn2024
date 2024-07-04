@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
 
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         cam = GameObject.Find("Main Camera");
@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        float rotationX = mouseX * rotateSpeed;
-        float rotationY = mouseY * rotateSpeed;
+        float rotationX = mouseX * rotateSpeed * Time.deltaTime;
+        float rotationY = mouseY * rotateSpeed * Time.deltaTime;
 
         transform.Rotate(Vector3.up, rotationX);
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7880975600009953930}
   - component: {fileID: 2113960568627749279}
   - component: {fileID: 4734507947177368138}
+  - component: {fileID: 3697085606650770293}
   m_Layer: 0
   m_Name: Item_True_01
   m_TagString: TrueItem
@@ -29,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.3, y: 1, z: 1.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -105,3 +106,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3697085606650770293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7294586547841272342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bb7314948e04d78bdf258b456bd221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  star: {fileID: 4107087341336795763, guid: 7d4adacd83ff64c9dbdfd6f134cf4f29, type: 3}
