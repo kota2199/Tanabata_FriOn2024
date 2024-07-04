@@ -16,17 +16,10 @@ public class PlayerStateJumping : IPlayerState
     public void Entry()
     {
         Debug.Log("Jumping");
-        player.isJumping = true;
     }
     public void Execute()
     {
         player.playerAnimator.SetTrigger("Jumping");
-
-        if(player.isJumping && !player.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jumping@loop"))
-        {
-            player.isJumping = false;
-            player.playerAnimator.ResetTrigger("Jumping");
-        }
     }
     public void Exit()
     {

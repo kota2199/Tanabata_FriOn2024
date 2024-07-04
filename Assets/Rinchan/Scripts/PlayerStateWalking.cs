@@ -20,9 +20,9 @@ public class PlayerStateWalking : IPlayerState
     }
     public void Execute()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
         {
-            stateMachine.ChangeState(StateType.JUMPING.ToString());
+            stateMachine.ChangeState(StateType.STANDING.ToString());
         }
     }
     public void Exit()

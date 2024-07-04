@@ -19,15 +19,13 @@ public class PlayerStateStanding : IPlayerState
     }
     public void Execute() 
     {
-        if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow))
+        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             stateMachine.ChangeState(StateType.WALKING.ToString());
         }
-
-        if(Input.GetKeyDown(KeyCode.Space) && !player.isJumping)
-        {
-            stateMachine.ChangeState(StateType.JUMPING.ToString());
-        }
     }
-    public void Exit() { /*...*/ }
+    public void Exit()
+    {
+
+    }
 }
