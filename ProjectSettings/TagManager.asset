@@ -9,6 +9,7 @@ TagManager:
   - TrueItem
   - Item
   - AdditionalItem
+  - TrueItemParent
   layers:
   - Default
   - TransparentFX

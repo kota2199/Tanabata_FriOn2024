@@ -20,8 +20,8 @@ public class PlayerCameraController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");
 
         // マウスの動きに基づいて回転角度を更新
-        currentRotationY += mouseX * rotateSpeed;
-        currentRotationX -= mouseY * rotateSpeed;
+        currentRotationY += mouseX * rotateSpeed * Time.deltaTime;
+        currentRotationX -= mouseY * rotateSpeed * Time.deltaTime;
 
         // 上下回転の制限
         currentRotationX = Mathf.Clamp(currentRotationX, -maxVerticalAngle, maxVerticalAngle);

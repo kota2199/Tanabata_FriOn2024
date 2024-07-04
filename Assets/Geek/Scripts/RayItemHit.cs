@@ -26,7 +26,7 @@ public class RayItemHit : MonoBehaviour
                 GameObject hitObject = hit.collider.gameObject;
                 Debug.Log("Hit object: " + hitObject.name);
 
-                if(hitObject.tag == "TrueItem")
+                if(hitObject.tag == "TrueItemParent")
                 {
                     hitObject.GetComponent<StartGenerator>().isFounded();
                 }

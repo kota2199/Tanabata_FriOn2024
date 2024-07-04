@@ -11,6 +11,5 @@ public class StartGenerator : MonoBehaviour
     {
         Vector3 genePos = this.transform.position + new Vector3(0, 1, 0);
         Instantiate(star, genePos, Quaternion.identity);
-        Destroy(this.gameObject);
     }
 }
