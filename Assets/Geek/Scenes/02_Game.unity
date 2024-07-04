@@ -4146,6 +4146,7 @@ MonoBehaviour:
   gaugeValue: 0
   maxGaugeValue: 0
   fadeController: {fileID: 1283120001}
+  clearUis: {fileID: 0}
 --- !u!114 &1193283029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4597,7 +4598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1283119997
 MonoBehaviour:
   m_ObjectHideFlags: 0
