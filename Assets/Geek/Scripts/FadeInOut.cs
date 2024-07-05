@@ -16,6 +16,8 @@ public class FadeInOut : MonoBehaviour
     private bool FOFlag;
     public GameObject FadeInPanel;
     public GameObject FadeOutPanel;
+
+    //public GameObject fadePanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,28 +44,60 @@ public class FadeInOut : MonoBehaviour
         {
             FadeInPanel.GetComponent<Image>().color = new Color(inred, ingreen, inblue, inalfa);
             inalfa -= speed;
+            if(inalfa <= 0.0f)
+            {
+                FIFlag = false;
+                FadeInPanel.SetActive(false);
+                inalfa = 1;
+            }
 
         }
         if (FOFlag == true)
         {
             FadeOutPanel.GetComponent<Image>().color = new Color(red, green, blue, outalfa);
             outalfa += speed;
+            Debug.Log("outalfa" + outalfa);
+            if (outalfa >= 1)
+            {
+                FOFlag = false;
+            }
         }
     }
-    public void FadeOut()
-    {
-        FadeOutPanel.SetActive(true);
-        Invoke("FadeStart", 0.5f);
-    }
+
     public void FadeStart()
     {
         FOFlag = true;
     }
-    private IEnumerator FadeIn()
+    public IEnumerator FadeInandOut()
     {
+        FadeOutPanel.SetActive(true);
+        FOFlag = true;
+
+        yield return new WaitUntil(() => !FOFlag);
+        yield return new WaitForSeconds(1);
+
+
+        FadeOutPanel.SetActive(false);
+        outalfa = 0;
+
+        FadeInPanel.SetActive(true);
         FIFlag = true;
-        yield return new WaitForSeconds(0.8f);
-        FIFlag = false;
-        FadeInPanel.SetActive(false);
+    }
+
+    public IEnumerator FadeOut()
+    {
+        FadeOutPanel.SetActive(true);
+        FOFlag = true;
+        yield return new WaitUntil(() => !FOFlag);
+
+        //FadeOutPanel.SetActive(false);
+        outalfa = 0;
+    }
+
+    public IEnumerator FadeIn()
+    {
+        FadeInPanel.SetActive(true);
+        FIFlag = true;
+        yield return new WaitUntil(() => !FIFlag);
     }
 }

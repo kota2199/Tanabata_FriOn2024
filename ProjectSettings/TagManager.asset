@@ -7,6 +7,9 @@ TagManager:
   - Goal
   - FalseItem
   - TrueItem
+  - Item
+  - AdditionalItem
+  - TrueItemParent
   layers:
   - Default
   - TransparentFX

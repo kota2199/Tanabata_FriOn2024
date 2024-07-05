@@ -228,7 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c38cca0eb1547f1beeee016c4ed831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: https://7f95-133-218-49-131.ngrok-free.app/
+  nextStageUrl: https://7581-133-218-49-131.ngrok-free.app/next_stage
+  clearUrl: https://7581-133-218-49-131.ngrok-free.app/game_clear
 --- !u!1 &1873085698
 GameObject:
   m_ObjectHideFlags: 0
