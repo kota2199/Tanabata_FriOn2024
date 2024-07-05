@@ -33,6 +33,20 @@ public class RayItemHit : MonoBehaviour
 
                 // 必要に応じて、追加の処理をここに記述
             }
+
+            if (Physics.Raycast(ray, out hit, rayLength))
+            {
+                // 当たったオブジェクトの情報を取得
+                GameObject hitObject = hit.collider.gameObject;
+                Debug.Log("Hit object: " + hitObject.name);
+
+                if (hitObject.tag == "TrueItem")
+                {
+                    GetComponent<TrueItemJudger>().GetStar(hitObject);
+                }
+
+                // 必要に応じて、追加の処理をここに記述
+            }
         }
     }
 }

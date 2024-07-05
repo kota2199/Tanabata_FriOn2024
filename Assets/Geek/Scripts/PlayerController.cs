@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         Vector2 moveInput = new Vector3(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
 
         // 移動方向を計算
-        Vector3 movement = transform.forward * moveInput.x + transform.right * moveInput.y;
+        Vector3 movement = transform.forward * moveInput.x;
         movement = movement.normalized * walkSpeed * Time.deltaTime;
 
         // Rigidbodyを用いて移動

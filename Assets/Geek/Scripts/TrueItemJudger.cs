@@ -53,14 +53,21 @@ public class TrueItemJudger : MonoBehaviour
         gauge.rectTransform.sizeDelta = new Vector2(maxGaugeValue * currentStageNumber / 7, 49f);
     }
 
+    public void GetStar(GameObject star)
+    {
+        AudioController.instance.PlaySE(1);
+        withItem = true;
+        Destroy(star.gameObject);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "TrueItem")
-        {
-            AudioController.instance.PlaySE(1);
-            withItem = true;
-            Destroy(other.gameObject);
-        }
+        //if(other.gameObject.tag == "TrueItem")
+        //{
+        //    AudioController.instance.PlaySE(1);
+        //    withItem = true;
+        //    Destroy(other.gameObject);
+        //}
 
         if(other.gameObject.tag == "Goal")
         {
@@ -92,6 +99,8 @@ public class TrueItemJudger : MonoBehaviour
 
             stagePrefabs[stageNumber - 1].gameObject.SetActive(false);
             stagePrefabs[stageNumber].gameObject.SetActive(true);
+
+            StartCoroutine(SendWebRequest.instance.PostNextSceneData(currentStageNumber));
 
             currentStageNumber++;
 
@@ -137,6 +146,7 @@ public class TrueItemJudger : MonoBehaviour
 
     private IEnumerator ToClear()
     {
+        StartCoroutine(SendWebRequest.instance.PostClearData());
         IEnumerator enumerator = fadeController.FadeOut();
         yield return enumerator;
         clearUis.SetActive(true);

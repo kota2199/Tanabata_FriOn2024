@@ -786,8 +786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c38cca0eb1547f1beeee016c4ed831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStageUrl: https://7581-133-218-49-131.ngrok-free.app/next_stage
-  clearUrl: https://7581-133-218-49-131.ngrok-free.app/game_clear
+  nextStageUrl: https://seventh-amanogawa-backend.fly.dev/next_stage
+  clearUrl: https://seventh-amanogawa-backend.fly.dev/game_clear
   team: 
   stage: 0
 --- !u!1 &1162864293
