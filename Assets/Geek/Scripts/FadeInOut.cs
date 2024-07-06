@@ -72,10 +72,12 @@ public class FadeInOut : MonoBehaviour
         FOFlag = true;
 
         yield return new WaitUntil(() => !FOFlag);
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
 
-        FadeInPanel.SetActive(true);
-        FIFlag = true;
+        //FadeInPanel.SetActive(true);
+        //FIFlag = true;
+        IEnumerator enumerator = FadeIn();
+        yield return enumerator;
         FadeOutPanel.SetActive(false);
         outalfa = 0;
     }
@@ -93,6 +95,7 @@ public class FadeInOut : MonoBehaviour
     {
         FadeOutPanel.SetActive(false);
         FadeInPanel.SetActive(true);
+        inalfa = 1;
         FIFlag = true;
         yield return new WaitUntil(() => !FIFlag);
     }
