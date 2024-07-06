@@ -28,6 +28,7 @@ public class RayItemHit : MonoBehaviour
 
                 if(hitObject.tag == "TrueItemParent")
                 {
+                    AudioController.instance.PlaySE(5);
                     hitObject.GetComponent<StartGenerator>().isFounded();
                 }
 

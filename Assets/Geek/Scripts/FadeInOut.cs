@@ -17,7 +17,6 @@ public class FadeInOut : MonoBehaviour
     public GameObject FadeInPanel;
     public GameObject FadeOutPanel;
 
-    //public GameObject fadePanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +55,6 @@ public class FadeInOut : MonoBehaviour
         {
             FadeOutPanel.GetComponent<Image>().color = new Color(red, green, blue, outalfa);
             outalfa += speed;
-            Debug.Log("outalfa" + outalfa);
             if (outalfa >= 1)
             {
                 FOFlag = false;
@@ -76,12 +74,10 @@ public class FadeInOut : MonoBehaviour
         yield return new WaitUntil(() => !FOFlag);
         yield return new WaitForSeconds(1);
 
-
-        FadeOutPanel.SetActive(false);
-        outalfa = 0;
-
         FadeInPanel.SetActive(true);
         FIFlag = true;
+        FadeOutPanel.SetActive(false);
+        outalfa = 0;
     }
 
     public IEnumerator FadeOut()
@@ -90,12 +86,12 @@ public class FadeInOut : MonoBehaviour
         FOFlag = true;
         yield return new WaitUntil(() => !FOFlag);
 
-        //FadeOutPanel.SetActive(false);
         outalfa = 0;
     }
 
     public IEnumerator FadeIn()
     {
+        FadeOutPanel.SetActive(false);
         FadeInPanel.SetActive(true);
         FIFlag = true;
         yield return new WaitUntil(() => !FIFlag);

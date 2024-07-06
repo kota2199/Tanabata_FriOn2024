@@ -18,13 +18,12 @@ public class AdditionalItem : MonoBehaviour
     {
         additionalItemCounter = 0;
     }
-    private void OnTriggerEnter(Collider other)
+
+    public void GetItem(GameObject item)
     {
-        if(other.gameObject.tag == "AdditionalItem")
-        {
-            additionalItemCounter++;
-            itemImages[additionalItemCounter - 1].sprite = activeStar;
-            Destroy(other.gameObject);
-        }
+        AudioController.instance.PlaySE(1);
+        additionalItemCounter++;
+        itemImages[additionalItemCounter - 1].sprite = activeStar;
+        Destroy(item.gameObject);
     }
 }

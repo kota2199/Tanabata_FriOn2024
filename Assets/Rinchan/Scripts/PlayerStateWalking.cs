@@ -20,7 +20,7 @@ public class PlayerStateWalking : IPlayerState
     }
     public void Execute()
     {
-        if(Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
+        if(Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
         {
             stateMachine.ChangeState(StateType.STANDING.ToString());
         }

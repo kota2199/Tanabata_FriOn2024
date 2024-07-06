@@ -11,6 +11,9 @@ public class TrueItemJudger : MonoBehaviour
     private GameObject[] stagePrefabs;
 
     [SerializeField]
+    private Material skybox_stage1, skybox_stage2;
+
+    [SerializeField]
     private bool[] withOrWithout;
 
     [SerializeField]
@@ -18,6 +21,7 @@ public class TrueItemJudger : MonoBehaviour
 
     private Vector3 playerDefaultPosition;
 
+    [SerializeField]
     private int currentStageNumber = 1;
 
     [SerializeField]
@@ -32,6 +36,8 @@ public class TrueItemJudger : MonoBehaviour
     [SerializeField]
     private GameObject clearUis;
 
+    public bool playerLock = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -42,8 +48,10 @@ public class TrueItemJudger : MonoBehaviour
 
     private void Start()
     {
+        RenderSettings.skybox = skybox_stage1;
         player = this.gameObject;
         playerDefaultPosition = player.transform.position;
+        AudioController.instance.PlaySE(2);
     }
 
     private void Update()
@@ -53,18 +61,22 @@ public class TrueItemJudger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "TrueItem")
+        if (other.gameObject.tag == "TrueItem")
         {
+            AudioController.instance.PlaySE(1);
             withItem = true;
             Destroy(other.gameObject);
         }
 
-        if(other.gameObject.tag == "Goal")
+        if (other.gameObject.tag == "Goal")
         {
+            playerLock = true;
+
+            AudioController.instance.PlaySE(2);
+
             if (withItem == withOrWithout[currentStageNumber - 1])
             {
                 StartCoroutine(ToNextStage(currentStageNumber));
-                currentStageNumber++;
             }
             else
             {
@@ -76,14 +88,32 @@ public class TrueItemJudger : MonoBehaviour
     private IEnumerator ToNextStage(int stageNumber)
     {
         Debug.Log("success");
+        if(stageNumber == 7)
+        {
+            StartCoroutine(ToClear());
+        }
+        else
+        {
+            IEnumerator enumerator = fadeController.FadeInandOut();
+            yield return enumerator;
 
-        IEnumerator enumerator = fadeController.FadeInandOut();
-        yield return enumerator;
+            if (currentStageNumber == 5)
+            {
+                Debug.Log("Sed2");
+                AudioController.instance.PlayBGM(1);
+                RenderSettings.skybox = skybox_stage2;
+                Debug.Log("Changed");
+            }
 
-        stagePrefabs[stageNumber - 1].gameObject.SetActive(false);
-        stagePrefabs[stageNumber].gameObject.SetActive(true);
+            stagePrefabs[stageNumber - 1].gameObject.SetActive(false);
+            stagePrefabs[stageNumber].gameObject.SetActive(true);
 
-        Initialize();
+            //StartCoroutine(SendWebRequest.instance.PostNextSceneData(currentStageNumber));
+
+            currentStageNumber++;
+
+            Initialize();
+        }
     }
 
     private IEnumerator ReturnStage(int stageNumber)
@@ -108,14 +138,10 @@ public class TrueItemJudger : MonoBehaviour
 
             case 5:
             case 6:
+            case 7:
                 stagePrefabs[4].gameObject.SetActive(true);
                 currentStageNumber = 5;
                 Initialize();
-                break;
-
-            case 7:
-                //end
-                clearUis.SetActive(true);
                 break;
         }
     }
@@ -124,5 +150,19 @@ public class TrueItemJudger : MonoBehaviour
     {
         player.transform.position = playerDefaultPosition;
         withItem = false;
+        playerLock = false;
+    }
+
+    private IEnumerator ToClear()
+    {
+        //StartCoroutine(SendWebRequest.instance.PostClearData());
+        IEnumerator enumerator = fadeController.FadeOut();
+        yield return enumerator;
+
+        AudioController.instance.StopBGM();
+        AudioController.instance.PlaySE(4);
+        clearUis.SetActive(true);
+        enumerator = fadeController.FadeIn();
+        yield return enumerator;
     }
 }

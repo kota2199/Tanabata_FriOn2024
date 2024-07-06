@@ -1,20 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class SendWebRequest : MonoBehaviour
 {
-    [SerializeField]
-    string url = "";
+    public static SendWebRequest instance;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    string nextStageUrl = "";
+
+    [SerializeField]
+    string clearUrl = "";
+
+    public string team;
+
+    public int stage;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //StartCoroutine(GetData());
-            StartCoroutine(PostData("example_data"));
+            StartCoroutine(PostNextSceneData(3));
         }
     }
 
@@ -25,32 +46,17 @@ public class SendWebRequest : MonoBehaviour
                req.result != UnityWebRequest.Result.ConnectionError;
     }
 
-    IEnumerator GetData()
-    {
-        using (UnityWebRequest req = UnityWebRequest.Get(url)) //UnityWebRequest型オブジェクト
-        {
-            yield return req.SendWebRequest(); //URLにリクエストを送る
-
-            if (IsWebRequestSuccessful(req)) //成功した場合
-            {
-                Debug.Log(req.downloadHandler.text);
-            }
-            else                            //失敗した場合
-            {
-                Debug.Log("error");
-            }
-        }
-    }
-
-    IEnumerator PostData(string message)
+    public IEnumerator PostNextSceneData(int stage)
     {
         WWWForm form = new WWWForm();
 
-        string text = message;
+        DateTime timeStamp = DateTime.Now;
 
-        form.AddField("data", text);
+        form.AddField("team_id", team);
+        form.AddField("stage", stage);
+        form.AddField("time_stamp", timeStamp.ToString());
 
-        using (UnityWebRequest req = UnityWebRequest.Post(url, form))
+        using (UnityWebRequest req = UnityWebRequest.Post(nextStageUrl, form))
         {
             //情報を送信
             yield return req.SendWebRequest();
@@ -63,7 +69,34 @@ public class SendWebRequest : MonoBehaviour
             }
             else
             {
-                Debug.Log("error");
+                Debug.Log(req.downloadHandler.text);
+            }
+        }
+    }
+
+    public IEnumerator PostClearData()
+    {
+        WWWForm form = new WWWForm();
+
+        DateTime timeStamp = DateTime.Now;
+
+        form.AddField("team_id", team);
+        form.AddField("time_stamp", timeStamp.ToString());
+
+        using (UnityWebRequest req = UnityWebRequest.Post(clearUrl, form))
+        {
+            //情報を送信
+            yield return req.SendWebRequest();
+
+            //リクエストが成功したかどうかの判定
+            if (IsWebRequestSuccessful(req))
+            {
+                //Debug.Log("success");
+                Debug.Log(req.downloadHandler.text);
+            }
+            else
+            {
+                Debug.Log(req.downloadHandler.text);
             }
         }
     }
