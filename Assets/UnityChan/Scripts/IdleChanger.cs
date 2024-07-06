@@ -6,7 +6,6 @@ namespace UnityChan
 //
 // ↑↓キーでループアニメーションを切り替えるスクリプト（ランダム切り替え付き）Ver.3
 // 2014/04/03 N.Kobayashi
-// 2015/03/11 Revised for Unity5 (only)
 //
 
 // Require these components when using this script
@@ -22,9 +21,8 @@ namespace UnityChan
 		private AnimatorStateInfo previousState;	// ひとつ前のステート状態を保存する参照
 		public bool _random = false;				// ランダム判定スタートスイッチ
 		public float _threshold = 0.5f;				// ランダム判定の閾値
-		public float _interval = 10f;               // ランダム判定のインターバル
-      //private float _seed = 0.0f;					// ランダム判定用シード
-        public bool isGUI = true;
+		public float _interval = 10f;				// ランダム判定のインターバル
+		//private float _seed = 0.0f;					// ランダム判定用シード
 	
 
 
@@ -58,7 +56,7 @@ namespace UnityChan
 			if (anim.GetBool ("Next")) {
 				// 現在のステートをチェックし、ステート名が違っていたらブーリアンをfalseに戻す
 				currentState = anim.GetCurrentAnimatorStateInfo (0);
-				if (previousState.fullPathHash != currentState.fullPathHash) {
+				if (previousState.nameHash != currentState.nameHash) {
 					anim.SetBool ("Next", false);
 					previousState = currentState;				
 				}
@@ -68,7 +66,7 @@ namespace UnityChan
 			if (anim.GetBool ("Back")) {
 				// 現在のステートをチェックし、ステート名が違っていたらブーリアンをfalseに戻す
 				currentState = anim.GetCurrentAnimatorStateInfo (0);
-				if (previousState.fullPathHash != currentState.fullPathHash) {
+				if (previousState.nameHash != currentState.nameHash) {
 					anim.SetBool ("Back", false);
 					previousState = currentState;
 				}
@@ -77,14 +75,11 @@ namespace UnityChan
 
 		void OnGUI ()
 		{
-            if (isGUI)
-            {
-                GUI.Box(new Rect(Screen.width - 110, 10, 100, 90), "Change Motion");
-                if (GUI.Button(new Rect(Screen.width - 100, 40, 80, 20), "Next"))
-                    anim.SetBool("Next", true);
-                if (GUI.Button(new Rect(Screen.width - 100, 70, 80, 20), "Back"))
-                    anim.SetBool("Back", true);
-            }
+			GUI.Box (new Rect (Screen.width - 110, 10, 100, 90), "Change Motion");
+			if (GUI.Button (new Rect (Screen.width - 100, 40, 80, 20), "Next"))
+				anim.SetBool ("Next", true);
+			if (GUI.Button (new Rect (Screen.width - 100, 70, 80, 20), "Back"))
+				anim.SetBool ("Back", true);
 		}
 
 

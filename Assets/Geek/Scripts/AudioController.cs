@@ -42,7 +42,8 @@ public class AudioController : MonoBehaviour
         if (audioSourceForBgm)
         {
             audioSourceForBgm.Stop();
-            audioSourceForBgm.PlayOneShot(audioData.bgms[index].bgmClip);
+            audioSourceForBgm.clip = audioData.bgms[index].bgmClip;
+            audioSourceForBgm.Play();
         }
     }
 

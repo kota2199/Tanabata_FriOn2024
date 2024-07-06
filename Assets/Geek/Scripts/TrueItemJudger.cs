@@ -11,6 +11,9 @@ public class TrueItemJudger : MonoBehaviour
     private GameObject[] stagePrefabs;
 
     [SerializeField]
+    private Material skybox_stage1, skybox_stage2;
+
+    [SerializeField]
     private bool[] withOrWithout;
 
     [SerializeField]
@@ -33,6 +36,8 @@ public class TrueItemJudger : MonoBehaviour
     [SerializeField]
     private GameObject clearUis;
 
+    public bool playerLock = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -43,6 +48,7 @@ public class TrueItemJudger : MonoBehaviour
 
     private void Start()
     {
+        RenderSettings.skybox = skybox_stage1;
         player = this.gameObject;
         playerDefaultPosition = player.transform.position;
         AudioController.instance.PlaySE(2);
@@ -53,24 +59,18 @@ public class TrueItemJudger : MonoBehaviour
         gauge.rectTransform.sizeDelta = new Vector2(maxGaugeValue * currentStageNumber / 7, 49f);
     }
 
-    public void GetStar(GameObject star)
-    {
-        AudioController.instance.PlaySE(1);
-        withItem = true;
-        Destroy(star.gameObject);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        //if(other.gameObject.tag == "TrueItem")
-        //{
-        //    AudioController.instance.PlaySE(1);
-        //    withItem = true;
-        //    Destroy(other.gameObject);
-        //}
-
-        if(other.gameObject.tag == "Goal")
+        if (other.gameObject.tag == "TrueItem")
         {
+            AudioController.instance.PlaySE(1);
+            withItem = true;
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.tag == "Goal")
+        {
+            playerLock = true;
 
             AudioController.instance.PlaySE(2);
 
@@ -97,10 +97,18 @@ public class TrueItemJudger : MonoBehaviour
             IEnumerator enumerator = fadeController.FadeInandOut();
             yield return enumerator;
 
+            if (currentStageNumber == 5)
+            {
+                Debug.Log("Sed2");
+                AudioController.instance.PlayBGM(1);
+                RenderSettings.skybox = skybox_stage2;
+                Debug.Log("Changed");
+            }
+
             stagePrefabs[stageNumber - 1].gameObject.SetActive(false);
             stagePrefabs[stageNumber].gameObject.SetActive(true);
 
-            StartCoroutine(SendWebRequest.instance.PostNextSceneData(currentStageNumber));
+            //StartCoroutine(SendWebRequest.instance.PostNextSceneData(currentStageNumber));
 
             currentStageNumber++;
 
@@ -142,13 +150,17 @@ public class TrueItemJudger : MonoBehaviour
     {
         player.transform.position = playerDefaultPosition;
         withItem = false;
+        playerLock = false;
     }
 
     private IEnumerator ToClear()
     {
-        StartCoroutine(SendWebRequest.instance.PostClearData());
+        //StartCoroutine(SendWebRequest.instance.PostClearData());
         IEnumerator enumerator = fadeController.FadeOut();
         yield return enumerator;
+
+        AudioController.instance.StopBGM();
+        AudioController.instance.PlaySE(4);
         clearUis.SetActive(true);
         enumerator = fadeController.FadeIn();
         yield return enumerator;

@@ -7,9 +7,12 @@ public class StartGenerator : MonoBehaviour
     [SerializeField]
     private GameObject star;
 
+    [SerializeField]
+    private Vector3 offset;
+
     public void isFounded()
     {
-        Vector3 genePos = this.transform.position + new Vector3(0, 1, 0);
+        Vector3 genePos = this.transform.position + offset;
         Instantiate(star, genePos, Quaternion.identity);
     }
 }

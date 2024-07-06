@@ -59,6 +59,7 @@ public class TitleController : MonoBehaviour
 
     public void PlusTeamAlphabet()
     {
+        AudioController.instance.PlaySE(3);
         teamNumber++;
         if(teamNumber > teamAlphabets.Length)
         {
@@ -69,6 +70,7 @@ public class TitleController : MonoBehaviour
 
     public void MinusTeamAlphabet()
     {
+        AudioController.instance.PlaySE(3);
         teamNumber--;
         if (teamNumber < 1)
         {

@@ -16,5 +16,9 @@ MonoBehaviour:
   - seClip: {fileID: 8300000, guid: 80f5bbc17d691440490d37777b5c0bbc, type: 3}
   - seClip: {fileID: 8300000, guid: 19310e97ff78d4084a3da36ab1eb5832, type: 3}
   - seClip: {fileID: 8300000, guid: 8016944bac2ad43ba98d9628095128a1, type: 3}
+  - seClip: {fileID: 8300000, guid: c34b8ca54b0db48c3906add189b3d138, type: 3}
+  - seClip: {fileID: 8300000, guid: e04d9f87b2c624cf88370254423730e4, type: 3}
+  - seClip: {fileID: 8300000, guid: 34ab3f833d8c64b4a99cf0bb7dfd82ca, type: 3}
   bgms:
   - bgmClip: {fileID: 8300000, guid: b1d301e7c3e854dcbbae1a2971017ddd, type: 3}
+  - bgmClip: {fileID: 8300000, guid: 408eb197b777245a3926ae7753eaefb0, type: 3}
