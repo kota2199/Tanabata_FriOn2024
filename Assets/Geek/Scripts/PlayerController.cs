@@ -60,6 +60,6 @@ public class PlayerController : MonoBehaviour
 
         //RotateCamera
         cam.transform.Rotate(Vector3.right, -rotationY);
-        cam.transform.position = this.transform.position + new Vector3(0, 1, -2);
+        //cam.transform.position = this.transform.position + new Vector3(0, 1, -2);
     }
 }
