@@ -20,12 +20,8 @@ public class PlayerStateWalking : IPlayerState
     }
     public void Execute()
     {
-<<<<<<< Updated upstream
         if(Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)
          || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
-=======
-        if(Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
->>>>>>> Stashed changes
         {
             stateMachine.ChangeState(StateType.STANDING.ToString());
         }
