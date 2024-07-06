@@ -26,6 +26,7 @@ public class TitleController : MonoBehaviour
     private void Start()
     {
         teamAlphabet = "A";
+        AudioController.instance.PlayBGM(0);
     }
 
     private void Update()
@@ -58,6 +59,7 @@ public class TitleController : MonoBehaviour
 
     public void PlusTeamAlphabet()
     {
+        AudioController.instance.PlaySE(3);
         teamNumber++;
         if(teamNumber > teamAlphabets.Length)
         {
@@ -68,12 +70,20 @@ public class TitleController : MonoBehaviour
 
     public void MinusTeamAlphabet()
     {
+        AudioController.instance.PlaySE(3);
         teamNumber--;
         if (teamNumber < 1)
         {
             teamNumber = teamAlphabets.Length;
         }
         teamAlphabet = teamAlphabets[teamNumber -1];
+    }
+
+    public void GameStart()
+    {
+        AudioController.instance.PlaySE(1);
+        explainPanel.SetActive(true);
+        SendWebRequest.instance.team = teamAlphabet;
     }
 
     // Update is called once per frame
@@ -84,14 +94,10 @@ public class TitleController : MonoBehaviour
 
     private IEnumerator ToGame()
     {
+        AudioController.instance.PlaySE(0);
         IEnumerator enumerator = fadeController.FadeOut();
         yield return enumerator;
+        yield return new WaitForSeconds(AudioController.instance.audioData.ses[0].seClip.length);
         SceneController.instance.ToGame();
-    }
-
-    public void GameStart()
-    {
-        explainPanel.SetActive(true);
-        SendWebRequest.instance.team = teamAlphabet;
     }
 }

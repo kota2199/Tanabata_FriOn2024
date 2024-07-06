@@ -36,8 +36,6 @@ public class SendWebRequest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(PostNextSceneData(3));
-
-            //StartCoroutine(PostClearData());
         }
     }
 

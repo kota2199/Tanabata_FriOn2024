@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float walkSpeed;
+    [SerializeField]
+    private float horizontalWalkSpeed;
 
     [SerializeField]
     private float rotateSpeed;
@@ -15,10 +17,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject cam;
 
+    [SerializeField]
+    private TrueItemJudger playerLocker;
+
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        playerLocker = GetComponent<TrueItemJudger>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -37,7 +43,11 @@ public class PlayerController : MonoBehaviour
         movement = movement.normalized * walkSpeed * Time.deltaTime;
 
         // Rigidbodyを用いて移動
-        rigid.MovePosition(rigid.position + movement);
+
+        if (!playerLocker.playerLock)
+        {
+            rigid.MovePosition(rigid.position + movement);
+        }
 
         //RotatePlayer
         float mouseX = Input.GetAxis("Mouse X");

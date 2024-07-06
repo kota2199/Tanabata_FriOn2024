@@ -7,8 +7,7 @@ public class AudioController : MonoBehaviour
 
     public static AudioController instance;
 
-    [SerializeField]
-    private AudioData audioData;
+    public AudioData audioData;
 
     [SerializeField]
     private AudioSource audioSourceForSe;
@@ -43,7 +42,8 @@ public class AudioController : MonoBehaviour
         if (audioSourceForBgm)
         {
             audioSourceForBgm.Stop();
-            audioSourceForBgm.PlayOneShot(audioData.bgms[index].bgmClip);
+            audioSourceForBgm.clip = audioData.bgms[index].bgmClip;
+            audioSourceForBgm.Play();
         }
     }
 

@@ -10,6 +10,7 @@ public class PlayerCameraController : MonoBehaviour
     public float distance = 5f; // プレイヤーからカメラまでの距離
     public float maxVerticalAngle = 60f; // 上下回転の最大角度
     public float minDistance = 1f; // 障害物がある場合の最小距離
+    public float smoothSpeed = 0.125f; // カメラの動きのスムージング速度
 
     private float currentRotationY = 0f;
     private float currentRotationX = 0f;
@@ -31,19 +32,22 @@ public class PlayerCameraController : MonoBehaviour
 
         // カメラの位置をプレイヤーの位置とオフセットに基づいて計算
         Vector3 offset = new Vector3(0, heightOffset, -distance);
-        Vector3 targetPosition = player.position + rotation * offset;
+        Vector3 desiredPosition = player.position + rotation * offset;
 
         // カメラとプレイヤーの間に障害物がないかRaycastでチェック
         RaycastHit hit;
-        if (Physics.Raycast(player.position + new Vector3(0, heightOffset, 0), targetPosition - (player.position + new Vector3(0, heightOffset, 0)), out hit, distance))
+        if (Physics.Raycast(player.position + new Vector3(0, heightOffset, 0), desiredPosition - (player.position + new Vector3(0, heightOffset, 0)), out hit, distance))
         {
             // 障害物がある場合、カメラの位置を調整
             float adjustedDistance = Vector3.Distance(player.position + new Vector3(0, heightOffset, 0), hit.point) - 0.5f;
-            targetPosition = player.position + rotation * new Vector3(0, heightOffset, -Mathf.Clamp(adjustedDistance, minDistance, distance));
+            desiredPosition = player.position + rotation * new Vector3(0, heightOffset, -Mathf.Clamp(adjustedDistance, minDistance, distance));
         }
 
-        // カメラの位置と回転を更新
-        transform.position = targetPosition;
+        // カメラの位置をスムージングして更新
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        transform.position = smoothedPosition;
+
+        // カメラの回転を更新
         transform.LookAt(player.position + new Vector3(0, heightOffset, 0));
     }
 }
