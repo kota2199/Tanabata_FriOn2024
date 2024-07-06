@@ -23,11 +23,8 @@ public class Player : MonoBehaviour
         // 初期ステートの設定
         stateMachine.ChangeState(StateType.STANDING.ToString());
 
-<<<<<<< Updated upstream
-        playerTransform = GetComponent<Transform> ();
-=======
         playerTransform = GetComponent<Transform>();
->>>>>>> Stashed changes
+
         playerRotation = playerTransform.rotation;
     }
 
@@ -37,7 +34,6 @@ public class Player : MonoBehaviour
         // ステートを更新
         stateMachine.Update();
 
-<<<<<<< Updated upstream
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
@@ -48,19 +44,7 @@ public class Player : MonoBehaviour
         {
             playerRotation = Quaternion.LookRotation(aim, Vector3.up);
         }    
-=======
-        
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-        
-        var _horizontalRotation = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up);
-        aim = _horizontalRotation * new Vector3(horizontal, 0, vertical).normalized;
 
-        if(aim.magnitude > 0.5f) 
-        {
-             playerRotation = Quaternion.LookRotation(aim, Vector3.up);
-        }       
->>>>>>> Stashed changes
         playerTransform.rotation = Quaternion.RotateTowards(playerTransform.rotation, playerRotation, 600 * Time.deltaTime);
     }
 }
