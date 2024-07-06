@@ -1660,7 +1660,7 @@ MonoBehaviour:
   player: {fileID: 1193283025}
   rotateSpeed: 20
   heightOffset: 1.5
-  distance: 5
+  distance: 8
   maxVerticalAngle: 60
   minDistance: 1
   smoothSpeed: 0.125
