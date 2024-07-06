@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Geek/Scenes/02_Game.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Geek/Scenes/03_ClearAnime.unity
+    guid: 891702fbcb8c54b64a1340cbc8399c25
+  - enabled: 1
+    path: Assets/Geek/Scenes/04_Clear.unity
+    guid: ed2ead071a2734ef9a574c2cb50183f1
   m_configObjects: {}

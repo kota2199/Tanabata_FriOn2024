@@ -8,47 +8,29 @@ public class ClearSceneManager : MonoBehaviour
     [SerializeField]
     private FadeInOut fadeController;
 
-    [SerializeField]
-    private AdditionalItem itemManager;
-
-    [SerializeField]
-    private Text keywordText;
-
-    private string keyword;
-
     private void OnEnable()
     {
         Debug.Log("enable");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
 
-        switch (itemManager.additionalItemCounter)
-        {
-            case 0:
-            case 1:
-                keyword = "彦星はわし座のベガ。";
-                break;
-            case 2:
-                keyword = "彦星はわし座のベガ。織姫はこと座のアルタイル。";
-                break;
-            case 3:
-                keyword = "彦星はわし座のベガ。織姫はこと座のアルタイル。はくちょう座のデネブを結ぶと夏の大三角。";
-                break;
-        }
-
-        keywordText.text = keyword;
+    public void Retry()
+    {
+        StartCoroutine(ToTitleWithFade("02_Game"));
     }
 
     public void ToTitle()
     {
-        StartCoroutine(ToTitleWithFade());
+        StartCoroutine(ToTitleWithFade("01_Title"));
     }
 
-    private IEnumerator ToTitleWithFade()
+    private IEnumerator ToTitleWithFade(string sceneName)
     {
         AudioController.instance.PlaySE(2);
         IEnumerator enumerator = fadeController.FadeOut();
         yield return enumerator;
-        SceneController.instance.ToCustomScene("01_Title");
+        AudioController.instance.PlayBGM(0);
+        SceneController.instance.ToCustomScene(sceneName);
     }
 }

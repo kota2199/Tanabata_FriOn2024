@@ -38,6 +38,9 @@ public class TrueItemJudger : MonoBehaviour
 
     public bool playerLock = false;
 
+    [SerializeField]
+    private Text menCounter;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -57,6 +60,7 @@ public class TrueItemJudger : MonoBehaviour
     private void Update()
     {
         gauge.rectTransform.sizeDelta = new Vector2(maxGaugeValue * currentStageNumber / 7, 49f);
+        menCounter.text = currentStageNumber.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -94,7 +98,7 @@ public class TrueItemJudger : MonoBehaviour
         }
         else
         {
-            IEnumerator enumerator = fadeController.FadeInandOut();
+            IEnumerator enumerator = fadeController.FadeOut();
             yield return enumerator;
 
             if (currentStageNumber == 5)
@@ -107,8 +111,6 @@ public class TrueItemJudger : MonoBehaviour
 
             stagePrefabs[stageNumber - 1].gameObject.SetActive(false);
             stagePrefabs[stageNumber].gameObject.SetActive(true);
-
-            //StartCoroutine(SendWebRequest.instance.PostNextSceneData(currentStageNumber));
 
             currentStageNumber++;
 
@@ -151,18 +153,17 @@ public class TrueItemJudger : MonoBehaviour
         player.transform.position = playerDefaultPosition;
         withItem = false;
         playerLock = false;
+        StartCoroutine(fadeController.FadeIn());
     }
 
     private IEnumerator ToClear()
     {
-        //StartCoroutine(SendWebRequest.instance.PostClearData());
         IEnumerator enumerator = fadeController.FadeOut();
         yield return enumerator;
 
         AudioController.instance.StopBGM();
-        AudioController.instance.PlaySE(4);
-        clearUis.SetActive(true);
         enumerator = fadeController.FadeIn();
+        SceneController.instance.ToCustomScene("03_ClearAnime");
         yield return enumerator;
     }
 }
