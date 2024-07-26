@@ -26,15 +26,14 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         playerLocker = GetComponent<StageSwitcher>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         cam = GameObject.Find("Main Camera");
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateMouseMode();
+
         //Move
         Vector2 moveInput = new Vector3(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
 
@@ -59,7 +58,20 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up, rotationX);
 
         //RotateCamera
-        cam.transform.Rotate(Vector3.right, -rotationY);
-        //cam.transform.position = this.transform.position + new Vector3(0, 1, -2);
+        //cam.transform.Rotate(Vector3.right, -rotationY * (MouseSensitivityController.instance.mouseSense * 10f));
+    }
+
+    private void UpdateMouseMode()
+    {
+        if (MenuController.instance.onMenu)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

@@ -21,8 +21,8 @@ public class PlayerCameraController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");
 
         //マウスの移動と回転速度を計算
-        currentRotationY += mouseX * rotateSpeed * Time.deltaTime;
-        currentRotationX -= mouseY * rotateSpeed * Time.deltaTime;
+        currentRotationY += mouseX * rotateSpeed * (MouseSensitivityController.instance.mouseSense * 10) * Time.deltaTime;
+        currentRotationX -= mouseY * rotateSpeed * (MouseSensitivityController.instance.mouseSense * 10) * Time.deltaTime;
 
         //上下回転の制限
         currentRotationX = Mathf.Clamp(currentRotationX, -maxVerticalAngle, maxVerticalAngle);

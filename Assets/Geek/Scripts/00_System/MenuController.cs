@@ -7,7 +7,7 @@ public class MenuController : MonoBehaviour
 {
     public static MenuController instance;
 
-    private bool onMenu = false;
+    public bool onMenu = false;
 
     [SerializeField]
     private GameObject menuCanvas;
@@ -41,7 +41,6 @@ public class MenuController : MonoBehaviour
             else
             {
                 onMenu = true;
-                SetSliderValue();
             }
             menuStatus(onMenu);
         }
@@ -53,35 +52,54 @@ public class MenuController : MonoBehaviour
         menuCanvas.SetActive(status);
     }
 
-    private void SetSliderValue()
+    public float SetDefaultValue(MenuSlider getter)
     {
-        //seVolume.value = AudioController.instance.audioSourceForSe.volume * 100;
-        //bgmVolume.value = AudioController.instance.audioSourceForBgm.volume * 100;
-        //mouseSenseValue = ;
+        if(getter == seSlider)
+        {
+            return AudioController.instance.audioSourceForSe.volume;
+        }
+        else if(getter == bgmSlider)
+        {
+            return AudioController.instance.audioSourceForBgm.volume;
+        }
+        else if(getter == mouseSenseSlider)
+        {
+            return MouseSensitivityController.instance.mouseSense;
+        }
+        else
+        {
+            Debug.LogError("failed get default values");
+            return 0;
+        }
     }
 
     private void OnEnable()
     {
         seSlider.OnValueChanged += SeHandleValueChanged;
         bgmSlider.OnValueChanged += BgmHandleValueChanged;
+        mouseSenseSlider.OnValueChanged += MouseHandleValueChanged;
     }
 
     private void OnDisable()
     {
         seSlider.OnValueChanged -= SeHandleValueChanged;
         bgmSlider.OnValueChanged -= BgmHandleValueChanged;
+        mouseSenseSlider.OnValueChanged -= MouseHandleValueChanged;
     }
 
     private void SeHandleValueChanged(float newValue)
     {
-        //SEの音量を調整
-        AudioController.instance.audioSourceForSe.volume = newValue / 100;
+        AudioController.instance.audioSourceForSe.volume = Mathf.Floor(newValue * 100f) / 100f; ;
     }
 
     private void BgmHandleValueChanged(float newValue)
     {
-        Debug.Log("Slider value changed: " + newValue);
-        AudioController.instance.audioSourceForBgm.volume = newValue / 100;
+        AudioController.instance.audioSourceForBgm.volume = Mathf.Floor(newValue * 100f) / 100f;
+    }
+
+    private void MouseHandleValueChanged(float newValue)
+    {
+        MouseSensitivityController.instance.mouseSense = Mathf.Floor(newValue * 100f) / 100f;
     }
 
     public void SePointerUp()

@@ -5,6 +5,9 @@ using System;
 
 public class MenuSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    [SerializeField]
+    private MenuController menuCtrlr;
+
     /// <summary>
     /// Handle Drag
     /// </summary>
@@ -24,12 +27,8 @@ public class MenuSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField]
     private RectTransform fillRect;
 
-    private float maxfillScale = 1;
-
     [SerializeField]
     private RectTransform baseRect;
-
-    public int defaultValue;
 
     [SerializeField]
     private Text valueText;
@@ -51,19 +50,21 @@ public class MenuSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public event Action<float> OnValueChanged;
 
-    private void Start()
+    private void Awake()
     {
         targetRect = targetImage.GetComponent<RectTransform>();
-        targetDefaultPosY = targetRect.anchoredPosition.y;
-
         canvasRect = canvas.GetComponent<RectTransform>();
-
-        //DisplayMenu();
     }
 
-    public void DisplayMenu()
+    private void Start()
     {
-        value = defaultValue;
+        targetDefaultPosY = targetRect.anchoredPosition.y;
+    }
+
+    private void OnEnable()
+    {
+        value = menuCtrlr.SetDefaultValue(this);
+        targetRect.anchoredPosition = new Vector2((value * baseRect.sizeDelta.x) - baseRect.sizeDelta.x / 2, 0);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -73,7 +74,7 @@ public class MenuSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        isDraging = false;
+        isDraging =  false;
     }
 
     private void Update()
@@ -97,14 +98,14 @@ public class MenuSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 targetRect.anchoredPosition = new Vector2(baseRect.sizeDelta.x / -2, targetDefaultPosY);
             }
-        }
 
-        value = ((targetRect.anchoredPosition.x / (baseRect.sizeDelta.x / 2) * 100) + 100) / 2;
+            value = (targetRect.anchoredPosition.x + (baseRect.sizeDelta.x / 2)) / baseRect.sizeDelta.x;
+        }
 
         if (!float.IsNaN(value))
         {
-            valueText.text = value.ToString("f0");
-            fillRect.localScale = new Vector3(value / 100, 1, 1);
+            valueText.text = (value * 100).ToString("f0");
+            fillRect.localScale = new Vector3(value, 1, 1);
         }
     }
 }
