@@ -18,3 +18,32 @@
 視点移動：マウスを移動
 ## メニュー
 BGM,SE音量調整、マウス感度調整メニューの表示非表示：Escapeキー
+
+# 使用アセット、フリー素材
+[【3Dモデル】御神輿](https://booth.pm/ja/items/2655199)
+
+[【3Dモデル】灯籠 ～とうろう～](https://booth.pm/ja/items/5092214)
+
+[【3D素材_fbx】提灯](https://booth.pm/ja/items/3350241)
+
+[Earth Rendering Free](https://assetstore.unity.com/packages/vfx/shaders/earth-rendering-free-54914)
+
+[Real Stars Skybox Lite](https://assetstore.unity.com/packages/3d/environments/sci-fi/real-stars-skybox-lite-116333)
+
+[Tileable Pack 01](https://assetstore.unity.com/packages/2d/textures-materials/floors/tileable-pack-01-49278)
+
+[スタークッション](https://booth.pm/ja/items/4556400)
+
+[和太鼓【3Dモデル】](https://booth.pm/ja/items/3463040)
+
+[提灯『Blender3Dモデル』](https://booth.pm/ja/items/5119323)
+
+[【無料】りんご飴](https://booth.pm/ja/items/4112447)
+
+[看板](https://booth.pm/ja/items/2612351)
+
+[笹](https://booth.pm/ja/items/4177500)
+
+[門（寺院）](https://booth.pm/ja/items/4329045)
+
+[風格のある鳥居](https://booth.pm/ja/items/4827434)
