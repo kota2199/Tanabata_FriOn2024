@@ -3803,7 +3803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c053d40b410461bb17553f9de94536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.005
+  speed: 0.01
   FadeInPanel: {fileID: 2099044841}
   FadeOutPanel: {fileID: 1146198520}
 --- !u!114 &1746787076
@@ -4245,9 +4245,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0, y: -0.018829703, z: 0.022645134}
   m_RotationAtRest: {x: -89.980225, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.00017379234, y: -0.78670895, z: 0.0014953613}
+  - {x: -0.0006678775, y: -0.75627315, z: 0.16300218}
   m_RotationOffsets:
-  - {x: -89.97203, y: 0, z: 0}
+  - {x: -89.980225, y: 0, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -4257,7 +4257,7 @@ ParentConstraint:
   m_Active: 1
   m_IsLocked: 0
   m_Sources:
-  - sourceTransform: {fileID: 1476958212}
+  - sourceTransform: {fileID: 203660435}
     weight: 1
 --- !u!23 &1874293015
 MeshRenderer:
