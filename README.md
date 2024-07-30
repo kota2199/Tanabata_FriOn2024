@@ -1,9 +1,10 @@
 # 7番天の川
 こちらは”7番天の川”のUnityプロジェクトです。
-ゲームを実行するときは/Assets/Geek/Scenes/01_Titleシーンからお願いします。　
 
 # Unityroomにて配信中
 [こちら](https://unityroom.com/games/amanogawa-7)からブラウザ上でプレイできます。
+
+Unityエディタ内でゲームを実行するときは/Assets/Geek/Scenes/01_Titleシーンからお願いします。　
 
 # 操作方法
 ## キャラクター
