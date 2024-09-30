@@ -2508,7 +2508,7 @@ MonoBehaviour:
   walkSpeed: 5
   horizontalWalkSpeed: 2
   rotateSpeed: 20
-  cam: {fileID: 1283119996}
+  cam: {fileID: 963194225}
   playerLocker: {fileID: 0}
 --- !u!114 &1193283029
 MonoBehaviour:

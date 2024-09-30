@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         playerLocker = GetComponent<StageSwitcher>();
-
-        cam = GameObject.Find("Main Camera");
     }
 
     // Update is called once per frame
@@ -34,11 +32,14 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMouseMode();
 
-        //Move
+        //KeyInput
         Vector2 moveInput = new Vector3(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
 
+        //カメラが向いている方向を取得
+        Transform camVector = cam.transform;
+
         // 移動方向を計算
-        Vector3 movement = transform.forward * moveInput.x + transform.right * moveInput.y;
+        Vector3 movement = camVector.forward * moveInput.x + camVector.right * moveInput.y;
         movement = movement.normalized * walkSpeed * Time.deltaTime;
 
         // Rigidbodyを用いて移動
@@ -50,15 +51,10 @@ public class PlayerController : MonoBehaviour
 
         //RotatePlayer
         float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
 
         float rotationX = mouseX * rotateSpeed * Time.deltaTime;
-        float rotationY = mouseY * rotateSpeed * Time.deltaTime;
 
-        transform.Rotate(Vector3.up, rotationX);
-
-        //RotateCamera
-        //cam.transform.Rotate(Vector3.right, -rotationY * (MouseSensitivityController.instance.mouseSense * 10f));
+        //transform.Rotate(Vector3.up, rotationX);
     }
 
     private void UpdateMouseMode()
